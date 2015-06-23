@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page Title</title>
+		<script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="index.js" type="text/javascript"></script>
+        <style>
+            .green {
+                color: green;
+            }
+
+            .red {
+                color: red;
+            } 
+            .blue {
+                color: blue;
+            }
+        </style>
+	</head>
+	<body>
+
+		<h1>Login Test Page</h1>
+
+		<form name="accountCreate">
+			<h2>Create an Account: </h2>
+            Username<input type="text" name="userid"/><br>
+            Password<input type="password" name="pswrd"/><br>
+            Repeat Password<input type="password" name="repeatpswrd"/><br>
+            <input type="button" onclick="create_account(this.form);" value="Create Account"/>
+            <input type="reset" value="Cancel"/>
+        </form>
+
+		<form name="accountLogin">
+			<h2>Login to your Account: </h2>
+            Username<input type="text" name="userid"/><br>
+            Password<input type="password" name="pswrd"/><br>
+            <input type="button" onclick="login(this.form);" value="Login"/>
+            <input type="reset" value="Cancel"/>
+        </form>        
+
+		<form name="accountChangePassword">
+			<h2>Change your password: </h2>
+            Username<input type="text" name="userid"/><br>
+            Old Password<input type="password" name="oldpswrd"/><br>
+            New Password<input type="password" name="newpswrd"/><br>
+            Repeat New Password <input type="password" name="repeatnewpswrd"/><br>
+            <input type="button" onclick="changePassword(this.form);" value="Change My Password!"/>
+            <input type="reset" value="Cancel"/>
+        </form>  
+
+		<form name="accountChangeEmail">
+			<h2>Change your email: </h2>
+            Current Email<input type="text" name="oldemail"/><br>
+            New Email<input type="text" name="newemail"/><br>
+			Password<input type="password" name="pswrd"/><br>
+            <input type="button" onclick="changeEmail(this.form);" value="Change My Email!"/>
+            <input type="reset" value="Cancel"/>
+        </form>  
+
+		<form name="accountResetEmail">
+			<h2>Reset My Password! </h2>
+            Current Email<input type="text" name="useremail"/><br>
+            <input type="button" onclick="sendPasswordReset(this.form);" value="Reset My Password!"/>
+            <input type="reset" value="Cancel"/>
+        </form>  
+
+        <form name="removeAccount">
+			<h2>Delete My Account: </h2>
+            Username<input type="text" name="useremail"/><br>
+            Password<input type="password" name="userpassword"/><br>
+            <input type="button" onclick="removeMyAccount(this.form);" value="Remove Account"/>
+            <input type="reset" value="Cancel"/>
+        </form> 
+
+        <div id="result">
+        </div>
+        <h1 class="blue" id="hitCountNumber">
+        </h1>
+
+	</body>
+</html>
