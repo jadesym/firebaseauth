@@ -17,16 +17,26 @@ var printResult = function(successOrError, msg) {
 	}
 };
 
+var logoutButton = $("<input/>", {
+	type: "button",
+	onclick: "logout()",
+	value: "Logout of your Account!"
+});
+
 // Create a callback which logs the current auth state
 function authDataCallback(authData) {
   if (authData) {
     var loggedIn = ("User " + authData.uid + " is logged in with " + authData.provider);
  	console.log(loggedIn);
  	printResult(true, loggedIn);
+ 	$("<h2>Logout of Your Account</h2>").appendTo('form[name="Logout"]');
+ 	logoutButton.appendTo('form[name="Logout"]');
+
   } else {
     var loggedOut = ("User is logged out");
     console.log(loggedOut);
     printResult(false, loggedOut);
+  	$('form[name="Logout"]').empty();
   }
 }
 // Register the callback to be fired every time auth state changes
@@ -220,6 +230,10 @@ var loginGoogleRedirect = function() {
 	});
 };
 
+var logout = function() {
+	ref.unauth();
+}
+
 var incrementHitCounter = function () {
 	var numHits = ref.child("siteHitCount");
 	// console.log(numHits);
@@ -236,8 +250,6 @@ var incrementHitCounter = function () {
 		return hitCount;
 	});
 };
-
-
 
 incrementHitCounter();
 
