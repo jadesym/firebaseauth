@@ -30,14 +30,16 @@ function authDataCallback(authData) {
   }
 }
 // Register the callback to be fired every time auth state changes
-// ref.onAuth(authDataCallback);
+ref.onAuth(authDataCallback);
 
-var authData = ref.getAuth();
-if (authData) {
-  console.log("User " + authData.uid + " is logged in with " + authData.provider);
-} else {
-  console.log("User is logged out");
-}
+var synchronousAuthCheck = function() {
+	var authData = ref.getAuth();
+	if (authData) {
+	  console.log("User " + authData.uid + " is logged in with " + authData.provider);
+	} else {
+	  console.log("User is logged out");
+	}
+};
 
 var create_account = function(form) {
 	var user = form.userid.value;
@@ -164,6 +166,29 @@ var removeMyAccount = function(form) {
 	});
 }
 
+var loginFacebookPopup = function() {
+	ref.authWithOAuthPopup("facebook", function(error, authData) {
+	  if (error) {
+	    console.log("Login to Facebook failed!", error);
+	    printResult(false, "Login to Facebook failed!");
+	  } else {
+	    console.log("Authenticated successfully with payload:", authData);
+	    printResult(true, "Authenticaed successfully with payload: " + authData);
+	  }
+	});
+};
+
+var loginFacebookRedirect = function() {
+	ref.authWithOAuthRedirect("facebook", function(error) {
+	  if (error) {
+	    console.log("Login to facebook failed w/ redirect!", error);
+	    console.log(false, "Login to Facebook failed w/ redirect");
+	  } else {
+	    // We'll never get here, as the page will redirect on success.
+	  }
+	});	
+};
+
 var incrementHitCounter = function () {
 	var numHits = ref.child("siteHitCount");
 	// console.log(numHits);
@@ -182,4 +207,3 @@ var incrementHitCounter = function () {
 }
 
 incrementHitCounter();
-
