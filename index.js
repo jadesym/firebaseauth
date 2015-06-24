@@ -17,6 +17,28 @@ var printResult = function(successOrError, msg) {
 	}
 };
 
+// Create a callback which logs the current auth state
+function authDataCallback(authData) {
+  if (authData) {
+    var loggedIn = ("User " + authData.uid + " is logged in with " + authData.provider);
+ 	console.log(loggedIn);
+ 	printResult(true, loggedIn);
+  } else {
+    var loggedOut = ("User is logged out");
+    console.log(loggedOut);
+    printResult(false, loggedOut);
+  }
+}
+// Register the callback to be fired every time auth state changes
+// ref.onAuth(authDataCallback);
+
+var authData = ref.getAuth();
+if (authData) {
+  console.log("User " + authData.uid + " is logged in with " + authData.provider);
+} else {
+  console.log("User is logged out");
+}
+
 var create_account = function(form) {
 	var user = form.userid.value;
 	var pass = form.pswrd.value;
@@ -160,3 +182,4 @@ var incrementHitCounter = function () {
 }
 
 incrementHitCounter();
+
