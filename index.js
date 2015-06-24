@@ -173,8 +173,10 @@ var loginFacebookPopup = function() {
 	    printResult(false, "Login to Facebook failed!");
 	  } else {
 	    console.log("Authenticated successfully with payload:", authData);
-	    printResult(true, "Authenticaed successfully with payload: " + authData);
+	    printResult(true, "Authenticated successfully with payload: " + authData);
 	  }
+	}, {
+		remember: "sessionOnly"
 	});
 };
 
@@ -182,11 +184,40 @@ var loginFacebookRedirect = function() {
 	ref.authWithOAuthRedirect("facebook", function(error) {
 	  if (error) {
 	    console.log("Login to facebook failed w/ redirect!", error);
-	    console.log(false, "Login to Facebook failed w/ redirect");
+	    printResult(false, "Login to Facebook failed w/ redirect");
 	  } else {
 	    // We'll never get here, as the page will redirect on success.
 	  }
+	}, {
+		remember: "sessionOnly"
 	});	
+};
+
+var loginGooglePopup = function() {
+	ref.authWithOAuthPopup("google", function(error, authData) {
+	  if (error) {
+	    console.log("Login to Google failed!", error);
+	    printResult(false, "Login to Google failed!");
+	  } else {
+	    console.log("Authenticated successfully with payload:", authData);
+	    printResult(true, "Authenticated successfully with payload: " + authData);
+	  }
+	}, {
+		remember: "sessionOnly"
+	});
+};
+
+var loginGoogleRedirect = function() {
+	ref.authWithOAuthRedirect("google", function(error) {
+	  if (error) {
+	    console.log("Login to Google Failed!", error);
+	    printResult(false, "Login to Google failed w/ redirect");
+	  } else {
+	    // We'll never get here, as the page will redirect on success.
+	  }
+	}, {
+		remember: "sessionOnly"
+	});
 };
 
 var incrementHitCounter = function () {
@@ -204,6 +235,10 @@ var incrementHitCounter = function () {
 		$("#hitCountNumber").html("Hit Count: " + hitCount.toString());
 		return hitCount;
 	});
-}
+};
+
+
 
 incrementHitCounter();
+
+// https://auth.firebase.com/v2/intense-inferno-6719/auth/google/callback
